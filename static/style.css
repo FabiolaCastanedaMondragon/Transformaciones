@@ -1,0 +1,126 @@
+/* Fuente general futurista */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #3b0a6b, #12005e);
+  margin: 20px;
+  text-align: center;
+  color: #ffffff;
+  overflow-x: hidden;
+  transition: background 0.5s ease;
+}
+
+/* Título futurista */
+h1 {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #00f0ff;
+  text-shadow: 0 0 10px #00f0ff, 0 0 20px #ff00f0;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+/* Canvas futurista */
+canvas {
+  max-width: 90%;
+  height: auto;
+  border-radius: 20px;
+  border: 2px solid #00f0ff;
+  box-shadow: 0 8px 25px rgba(0,240,255,0.4), 0 0 15px rgba(255,0,240,0.3);
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+  animation: glowCanvas 4s infinite alternate;
+}
+
+@keyframes glowCanvas {
+  0% { box-shadow: 0 8px 25px rgba(0,240,255,0.4), 0 0 15px rgba(255,0,240,0.3); }
+  50% { box-shadow: 0 12px 35px rgba(0,240,255,0.5), 0 0 25px rgba(255,0,240,0.4); }
+  100% { box-shadow: 0 8px 25px rgba(0,240,255,0.4), 0 0 15px rgba(255,0,240,0.3); }
+}
+
+/* Contenedor de sliders */
+.filtros-wrap {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 25px;
+  padding: 10px;
+}
+
+/* Cada filtro futurista */
+.filtro-item {
+  background: rgba(20, 20, 35, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 18px;
+  border: 1px solid #00f0ff;
+  box-shadow: 0 6px 20px rgba(0,240,255,0.2), 0 0 10px rgba(255,0,240,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover futurista */
+.filtro-item:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(0,240,255,0.4), 0 0 20px rgba(255,0,240,0.3);
+}
+
+/* Labels */
+.filtro-item div {
+  font-weight: 600;
+  font-size: 14px;
+  color: #00f0ff;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 4px rgba(0,240,255,0.5);
+}
+
+/* Sliders futuristas */
+.filtro-item input[type=range] {
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #00f0ff, #ff00f0);
+  outline: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(0,240,255,0.3), 0 0 5px rgba(255,0,240,0.2);
+  transition: all 0.3s ease;
+}
+
+/* Slider thumb Webkit */
+.filtro-item input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #00f0ff;
+  border: 2px solid #ff00f0;
+  box-shadow: 0 0 10px #00f0ff, 0 0 15px #ff00f0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filtro-item input[type=range]::-webkit-slider-thumb:hover {
+  transform: scale(1.3);
+  box-shadow: 0 0 15px #00f0ff, 0 0 20px #ff00f0;
+}
+
+/* Slider thumb Firefox */
+.filtro-item input[type=range]::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #00f0ff;
+  border: 2px solid #ff00f0;
+  box-shadow: 0 0 10px #00f0ff, 0 0 15px #ff00f0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Responsividad */
+@media (max-width: 500px) {
+  h1 { font-size: 26px; }
+  .filtro-item { padding: 16px; }
+  .filtro-item input[type=range] { height: 8px; }
+}

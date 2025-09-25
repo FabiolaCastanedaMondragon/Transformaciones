@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solvel</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>Transformaciones en la imagen</h1>
+  <canvas id="canvas"></canvas>
+
+  <div class="filtros-wrap" id="filtros"></div>
+
+  <script>
+    const image = new Image();
+    image.src = "/image";
+    image.onload = () => initTransformaciones();
+
+    let canvas, ctx;
+    let rotacion = 0, escalado = 1, traslacion = 0, cizallado = 0;
+
+    function initTransformaciones() {
+      canvas = document.getElementById('canvas');
+      ctx = canvas.getContext('2d');
+      canvas.width = image.width;
+      canvas.height = image.height;
+
+      const filtrosDiv = document.getElementById('filtros');
+
+      function crearSlider(nombre, min, max, step, valorInicial, callback) {
+        const box = document.createElement('div');
+        box.className = 'filtro-item';
+
+        const label = document.createElement('div');
+        label.textContent = nombre;
+
+        const slider = document.createElement('input');
+        slider.type = 'range';
+        slider.min = min;
+        slider.max = max;
+        slider.step = step;
+        slider.value = valorInicial;
+
+        slider.oninput = () => {
+          callback(parseFloat(slider.value));
+          dibujarTransformaciones();
+        };
+
+        box.appendChild(label);
+        box.appendChild(slider);
+        filtrosDiv.appendChild(box);
+      }
+
+      crearSlider("Rotación (°)", -180, 180, 1, 0, v => rotacion = v);
+      crearSlider("Escalado", 0.1, 3, 0.05, 1, v => escalado = v);
+      crearSlider("Traslación", -200, 200, 1, 0, v => traslacion = v);
+      crearSlider("Cizallado", -1, 1, 0.05, 0, v => cizallado = v);
+
+      dibujarTransformaciones();
+    }
+
+    function dibujarTransformaciones() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.save();
+
+      // Aplicar traslación conjunta
+      ctx.translate(canvas.width/2 + traslacion, canvas.height/2 + traslacion);
+      ctx.rotate(rotacion * Math.PI / 180);
+
+      // Aplicar cizallado unificado tanto en X como en Y
+      ctx.transform(1, cizallado, cizallado, 1, 0, 0);
+      ctx.scale(escalado, escalado);
+
+      ctx.drawImage(image, -image.width/2, -image.height/2);
+
+      ctx.restore();
+    }
+  </script>
+</body>
+</html>
